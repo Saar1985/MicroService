@@ -17,10 +17,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/actuator/**", "/users/**").permitAll()  // Allow access to these endpoints without authentication
-                        .requestMatchers("/users/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/actuator/**", "/users/**","/swagger-ui/**", "/v3/api-docs/**" ).permitAll()  // Allow access to these endpoints without authentication
                         .anyRequest().authenticated()  // Secure other endpoints with authentication
                 )
                 .httpBasic(withDefaults())  // Enable HTTP Basic Authentication
