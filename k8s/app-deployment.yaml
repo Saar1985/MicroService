@@ -27,7 +27,8 @@ spec:
     spec:
       containers:
         - name: springboot
-          image: gcr.io/aesthetic-fiber-455210-g0/microservice-app
+          image: gcr.io/aesthetic-fiber-455210-g0/microservice-app:latest  # Use the latest tag
+          imagePullPolicy: Always  # Ensure Kubernetes always pulls the latest image
           ports:
             - containerPort: 8080
           env:

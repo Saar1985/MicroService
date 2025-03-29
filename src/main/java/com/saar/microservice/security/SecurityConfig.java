@@ -15,15 +15,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.csrf(AbstractHttpConfigurer::disable)
-                .securityMatcher("/**")
+        return http
                 .authorizeHttpRequests(auth -> auth
-                        //.requestMatchers("/actuator/**", "/users/**").permitAll()
-                        .requestMatchers("/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/users/addUser").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/actuator/**", "/users/**").permitAll()  // Allow access to these endpoints without authentication
+                        .requestMatchers("/users/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .anyRequest().authenticated()  // Secure other endpoints with authentication
                 )
-                .httpBasic(withDefaults())
+                .httpBasic(withDefaults())  // Enable HTTP Basic Authentication
                 .build();
     }
 }
