@@ -24,6 +24,7 @@ public class UserController {
     @GetMapping( "/getAllUsers")
     public Iterable<UserData> GetAllUsers()
     {
+        System.out.println("🔥 Received GET to /getAllUsers: ");
         return userService.getAllUsers();
     }
 }
