@@ -17,6 +17,7 @@ public class UserController {
     @PostMapping("/addUser")
     public void CreateUser(@RequestBody UserData user)
     {
+        System.out.println("🔥 Received POST to /addUser: " + user);
         userService.createUser(user);
     }
 
