@@ -14,13 +14,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping()
+    @PostMapping("/addUser")
     public void CreateUser(@RequestBody UserData user)
     {
         userService.createUser(user);
     }
 
-    @GetMapping
+    @GetMapping( "/getAllUsers")
     public Iterable<UserData> GetAllUsers()
     {
         return userService.getAllUsers();
