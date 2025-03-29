@@ -2,7 +2,7 @@ name: Deploy to GKE
 
 on:
   push:
-    branches: [ "main" ]  # change to "master" or your main branch if needed
+    branches: [ "main" ]  # or "master", depending on your branch
 
 jobs:
   deploy:
@@ -30,6 +30,12 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: aesthetic-fiber-455210-g0
+
+      - name: Install gke-gcloud-auth-plugin
+        run: |
+          curl -LO https://github.com/googlecloudplatform/gke-gcloud-auth-plugin/releases/download/v0.1.0/gke-gcloud-auth-plugin-linux-amd64.tar.gz
+          tar -xzvf gke-gcloud-auth-plugin-linux-amd64.tar.gz
+          sudo mv gke-gcloud-auth-plugin /usr/local/bin/
 
       - name: Configure Docker for GCR
         run: gcloud auth configure-docker --quiet
