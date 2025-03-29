@@ -34,7 +34,7 @@ jobs:
       - name: Install gke-gcloud-auth-plugin
         run: |
           gcloud components install gke-gcloud-auth-plugin
-          sudo mv $(gcloud info --format='value(installation.sdk_root)')/lib/googlecloud/gke-gcloud-auth-plugin /usr/local/bin/
+          sudo mv $(gcloud info --format='value(installation.sdk_root)')/bin/gke-gcloud-auth-plugin /usr/local/bin/
 
       - name: Configure Docker for GCR
         run: gcloud auth configure-docker --quiet
