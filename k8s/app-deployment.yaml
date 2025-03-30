@@ -10,6 +10,7 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 8080
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -44,7 +45,7 @@ spec:
         - name: cloudsql-proxy
           image: gcr.io/cloudsql-docker/gce-proxy:1.33.10
           command: ["/cloud_sql_proxy",
-                    "-instances=aesthetic-fiber-455210-g0:us-central1:YOUR_INSTANCE_ID=tcp:3306",
+                    "-instances=aesthetic-fiber-455210-g0:me-west1:microservicedb=tcp:3306",
                     "-credential_file=/secrets/cloudsql/key.json"]
           volumeMounts:
             - name: cloudsql-instance-credentials
