@@ -27,14 +27,31 @@ spec:
     spec:
       containers:
         - name: springboot
-          image: gcr.io/aesthetic-fiber-455210-g0/microservice-app:latest  # Use the latest tag
-          imagePullPolicy: Always  # Ensure Kubernetes always pulls the latest image
+          image: gcr.io/aesthetic-fiber-455210-g0/microservice-app:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: prod
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://34.165.179.214:3306/microservicedb
+              value: jdbc:mysql://127.0.0.1:3306/microservicedb
             - name: SPRING_DATASOURCE_USERNAME
               value: production
             - name: SPRING_DATASOURCE_PASSWORD
               value: IU%#S49b96;VkzuC
+
+        - name: cloudsql-proxy
+          image: gcr.io/cloudsql-docker/gce-proxy:1.33.10
+          command: ["/cloud_sql_proxy",
+                    "-instances=aesthetic-fiber-455210-g0:us-central1:YOUR_INSTANCE_ID=tcp:3306",
+                    "-credential_file=/secrets/cloudsql/key.json"]
+          volumeMounts:
+            - name: cloudsql-instance-credentials
+              mountPath: /secrets/cloudsql
+              readOnly: true
+
+      volumes:
+        - name: cloudsql-instance-credentials
+          secret:
+            secretName: cloudsql-instance-credentials
