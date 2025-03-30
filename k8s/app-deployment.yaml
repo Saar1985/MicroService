@@ -40,7 +40,7 @@ spec:
             - name: SPRING_DATASOURCE_USERNAME
               value: production
             - name: SPRING_DATASOURCE_PASSWORD
-              value: IU%#S49b96;VkzuC
+              value: Saar!The>King$
 
         - name: cloudsql-proxy
           image: gcr.io/cloudsql-docker/gce-proxy:1.33.10
